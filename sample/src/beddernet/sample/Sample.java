@@ -11,7 +11,7 @@ import android.os.RemoteException;
 import beddernet.ipc.IBEDnetService;
 import beddernet.ipc.IBEDnetServiceCallback;
 
-public class BedderTestPlatform extends Activity implements ServiceConnection {
+public class Sample extends Activity implements ServiceConnection {
 
 	
 	private IBEDnetService bednetService;
