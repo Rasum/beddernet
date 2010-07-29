@@ -16,12 +16,15 @@ public class Sample extends Activity implements ServiceConnection {
 	private IBeddernetService beddernetService;
 	public static String applicationIdentifier = "sample application";
 	public static long applicationIdentifierHash;
-	ServiceConnection sc = this;
 
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		bind();
+	}
+
+	private void bind() {
 		Intent bindIntent = new Intent(
 				"itu.beddernet.approuter.BeddernetService");
 		this.bindService(bindIntent, this, Context.BIND_AUTO_CREATE);
@@ -36,14 +39,17 @@ public class Sample extends Activity implements ServiceConnection {
 			e.printStackTrace();
 		}
 		// Unbind with the service
-		unbindService(sc);
+		unbindService(this);
 		super.onDestroy();
 	}
 
+	/**
+	 * Rebind to the service after resume
+	 */
 	protected void onResume() {
 		if (beddernetService == null) {
 			// the service connection is null - rebooting");
-			onCreate(null);
+			bind();
 		}
 		super.onResume();
 	}
