@@ -16,28 +16,28 @@
  
 package beddernet.ipc;
 
-import beddernet.ipc.IBEDnetServiceCallback;
+import beddernet.ipc.IBeddernetServiceCallback;
 
 /**
  * Example of defining an interface for calling on to a remote service
  * (running in another process).
  */
-interface IBEDnetService {
+interface IBeddernetService {
     /**
      * Often you want to allow a service to call back to its clients.
      * This shows how to do so, by registering a callback interface with
      * the service.
      */
-    long registerCallback( in IBEDnetServiceCallback cb, String applicationIdentifier);
+    long registerCallback( in IBeddernetServiceCallback cb, String applicationIdentifier);
     
     /**
      * Remove a previously registered callback interface.
      */
-    void unregisterCallback(IBEDnetServiceCallback cb, String applicationIdentifier);
+    void unregisterCallback(IBeddernetServiceCallback cb, String applicationIdentifier);
     
     /**
      * Send a unicast message.  recipientApplicationIdentifier should be null unless 
-* message should be sent to a different application address .
+	* message should be sent to a different application address .
      */
     void sendUnicast(String networkAddress, String recipientApplicationIdentifier, in byte [] appMessage,  String applicationIdentifier);
 

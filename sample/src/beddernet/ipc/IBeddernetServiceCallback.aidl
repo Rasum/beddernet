@@ -21,7 +21,7 @@ package beddernet.ipc;
  * synchronous notifications back to its clients.  Note that this is a
  * one-way interface so the server does not block waiting for the client.
  */
- interface IBEDnetServiceCallback {
+ interface IBeddernetServiceCallback {
     /**
      * Called when the service has a new message for the binding app.
      */
