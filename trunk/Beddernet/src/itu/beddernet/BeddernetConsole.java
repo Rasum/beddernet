@@ -81,12 +81,15 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 	public TextView outputTextView;
 
 	protected void onDestroy() {
-		try {
-			mBeddernetService.unregisterCallback(mCallback, applicationIdentifier);
-		} catch (RemoteException e) {
-			Log.e(TAG, "Console could't unregister callback", e);
+		if (mBeddernetService != null) {
+			try {
+				mBeddernetService.unregisterCallback(mCallback,
+						applicationIdentifier);
+			} catch (RemoteException e) {
+				Log.e(TAG, "Console could't unregister callback", e);
+			}
+			unbindService(sc);
 		}
-		unbindService(sc);
 		super.onDestroy();
 	}
 
@@ -94,8 +97,9 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 		Log.d(TAG, "resuming");
 		if (mBeddernetService == null) {
 			Log.d(TAG, "the service connection is null - rebooting");
-//			onCreate(null);
-			Intent bindIntent = new Intent("itu.beddernet.approuter.BeddernetService");
+			// onCreate(null);
+			Intent bindIntent = new Intent(
+					"itu.beddernet.approuter.BeddernetService");
 			this.bindService(bindIntent, this, Context.BIND_AUTO_CREATE);
 		}
 		super.onResume();
@@ -106,7 +110,8 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-		Intent bindIntent = new Intent("itu.beddernet.approuter.BeddernetService");
+		Intent bindIntent = new Intent(
+				"itu.beddernet.approuter.BeddernetService");
 
 		this.bindService(bindIntent, this, Context.BIND_AUTO_CREATE);
 		setContentView(R.layout.main);
@@ -483,7 +488,7 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 		private double transferTime;
 		private long transferedBytes = 0;
 		private double kBitsPerSek = 0;
-//		private FileOutputStream fileOutput;
+		// private FileOutputStream fileOutput;
 		private long RTTTime;
 
 		/**
@@ -536,8 +541,8 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 				// outputTextView.append("Received ping from: "+ senderAddress+
 				// "\n");
 				byte[] messageString = { RTT_MESSAGE_REPLY };
-				mBeddernetService.sendUnicast(senderAddress, null, messageString,
-						applicationIdentifier);
+				mBeddernetService.sendUnicast(senderAddress, null,
+						messageString, applicationIdentifier);
 				break;
 			case RTT_MESSAGE_REPLY:
 				RTTEndTime = System.currentTimeMillis();
