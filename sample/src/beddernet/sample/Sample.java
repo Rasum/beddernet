@@ -8,13 +8,12 @@ import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
-import beddernet.ipc.IBEDnetService;
-import beddernet.ipc.IBEDnetServiceCallback;
+import beddernet.ipc.IBeddernetService;
+import beddernet.ipc.IBeddernetServiceCallback;
 
 public class Sample extends Activity implements ServiceConnection {
 
-	
-	private IBEDnetService bednetService;
+	private IBeddernetService beddernetService;
 	public static String applicationIdentifier = "sample application";
 	public static long applicationIdentifierHash;
 	ServiceConnection sc = this;
@@ -23,50 +22,47 @@ public class Sample extends Activity implements ServiceConnection {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		Intent bindIntent = new Intent("itu.bednet.approuter.BEDnetService");
+		Intent bindIntent = new Intent(
+				"itu.beddernet.approuter.BeddernetService");
 		this.bindService(bindIntent, this, Context.BIND_AUTO_CREATE);
 	}
 
-	
 	protected void onDestroy() {
 		try {
-			//Unregistering with the service
-			bednetService.unregisterCallback(callback, applicationIdentifier);
+			// Unregistering with the service
+			beddernetService
+					.unregisterCallback(callback, applicationIdentifier);
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
-		//Unbind with the service
+		// Unbind with the service
 		unbindService(sc);
 		super.onDestroy();
 	}
 
 	protected void onResume() {
-		if (bednetService == null) {
-			//the service connection is null - rebooting");
+		if (beddernetService == null) {
+			// the service connection is null - rebooting");
 			onCreate(null);
 		}
 		super.onResume();
 	}
-	
+
 	public void onServiceDisconnected(ComponentName name) {
 	}
 
-
 	public void onServiceConnected(ComponentName className, IBinder service) {
-		bednetService = IBEDnetService.Stub.asInterface(service);
-		if (bednetService == null)
-		try {
-			applicationIdentifierHash = bednetService.registerCallback(
-					callback, applicationIdentifier);
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
+		beddernetService = IBeddernetService.Stub.asInterface(service);
+		if (beddernetService == null)
+			try {
+				applicationIdentifierHash = beddernetService.registerCallback(
+						callback, applicationIdentifier);
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
 	}
 
-
-
-
-	private IBEDnetServiceCallback callback = new IBEDnetServiceCallback.Stub() {
+	private IBeddernetServiceCallback callback = new IBeddernetServiceCallback.Stub() {
 
 		/**
 		 * This is called by the remote service regularly to tell us about new
