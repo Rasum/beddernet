@@ -27,7 +27,27 @@ public class Sample extends Activity implements ServiceConnection {
 		this.bindService(bindIntent, this, Context.BIND_AUTO_CREATE);
 	}
 
+	
+	protected void onDestroy() {
+		try {
+			//Unregistering with the service
+			bednetService.unregisterCallback(callback, applicationIdentifier);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		//Unbind with the service
+		unbindService(sc);
+		super.onDestroy();
+	}
 
+	protected void onResume() {
+		if (bednetService == null) {
+			//the service connection is null - rebooting");
+			onCreate(null);
+		}
+		super.onResume();
+	}
+	
 	public void onServiceDisconnected(ComponentName name) {
 	}
 
@@ -39,7 +59,6 @@ public class Sample extends Activity implements ServiceConnection {
 			applicationIdentifierHash = bednetService.registerCallback(
 					callback, applicationIdentifier);
 		} catch (RemoteException e) {
-
 			e.printStackTrace();
 		}
 	}

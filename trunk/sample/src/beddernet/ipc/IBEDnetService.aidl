@@ -53,19 +53,12 @@ interface IBEDnetService {
     String[] getDevices(String applicationIdentifier);
     
    
-   /**
-   * The public property is used to designate if an app is put on the list of available services on the device. 
-   * this list can be requested by other devices (i.e.. looking for programs or services). 
-   * this enables applications to use services like "printservice" without the router telling other devices that it supports printservice. 
-   * default: true
-   */
-    void setPublic(boolean isPublic, String applicationIdentifier);
-    
+   
     /* Returns list of all devices on the scatternet with "applicationIdentifier", 
     * i.e. that have an app that has inserted that ss.
     */
-    String[] getListOfDevicesByServiceString(String applicationIdentifier);
-    
+	String[] getDevicesSupportingUAIS(String applicationIdentifier);
+	
     /** 
     * Check whether this service is supported by a particular device. 
     * If applicationIdentifier is null, the applicationIdentifierHash is used
@@ -92,10 +85,16 @@ interface IBEDnetService {
     void manualConnect(String remoteAddress);
     
     /**
-    * DEBUG: Management of the Maintainer thread
+    * DEBUG: Starts the Maintainer thread
     *
     */
     void startMaintainer();
+    
+    /**
+    * DEBUG: Stops the Maintainer thread
+    *
+    */
+    
     void stopMaintainer();
     
     /**
@@ -104,6 +103,10 @@ interface IBEDnetService {
     */
     void manualDisconnect(String remoteAddress);
     
+    /**
+    * DEBUG: Manually sets device visible to other bluetooth devices.
+    *
+    */
     void setDiscoverable(boolean discoverable);
     
     /**
@@ -124,6 +127,13 @@ interface IBEDnetService {
     *
     */
 	String[] getDevicesWithStatus();
+	
+		
+	/**
+	*DEBUG
+    *Returns all service hashes on a specific device. 
+    */	
+	long[] getAllUAIHOnDevice(String UAIH);
     
     
 }
