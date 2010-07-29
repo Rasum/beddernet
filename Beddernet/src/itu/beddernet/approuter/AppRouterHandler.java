@@ -11,7 +11,7 @@ import android.os.RemoteException;
 import android.util.Log;
 
 /**
- * Handles incoming messages from router
+ * Handles incoming messages from router 
  *
  */
 public class AppRouterHandler extends Handler {
