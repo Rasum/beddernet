@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent" android:background="@drawable/icon">
+	<TableLayout android:id="@+id/TableLayout01" android:layout_width="wrap_content" android:layout_height="wrap_content"><TableRow android:id="@+id/TableRow01" android:layout_width="wrap_content" android:layout_height="wrap_content">
+
+
+
+
+
+</TableRow>
+<TableRow android:id="@+id/TableRow03" android:layout_width="wrap_content" android:layout_height="wrap_content"><Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/Milestone" android:text="Milestone"></Button><Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/Magic" android:text="Magic"></Button>
+<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Svalur" android:id="@+id/Svalur"></Button>
+<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/MSI" android:text="Hero"></Button></TableRow>
+</TableLayout>
+	
+	
+	
+
+
+
+<CheckBox android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/MaintainerBox" android:text="Maintainer"></CheckBox><ListView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/in"></ListView>
+
+
+
+
+
+
+<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/outputTextView" android:scrollbarStyle="insideInset" android:text="Beddernet test platform"></TextView>
+
+</LinearLayout>

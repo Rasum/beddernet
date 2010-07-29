@@ -1,0 +1,14 @@
+itu.bednet
+itu.bednet.approuter
+itu.bednet.common
+itu.bednet.datalink
+itu.bednet.datalink.bluetooth
+itu.bednet.router
+itu.bednet.router.dsdv
+itu.bednet.router.dsdv.info
+itu.bednet.router.dsdv.minders
+itu.bednet.router.dsdv.msg
+itu.bednet.router.dsdv.net
+itu.bednet.router.message
+itu.bednet.router.message.multi
+itu.bednet.router.message.uni
