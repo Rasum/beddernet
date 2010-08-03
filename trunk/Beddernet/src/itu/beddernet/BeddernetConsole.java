@@ -342,7 +342,9 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 	}
 
 	public void fileTransferComplete() {
+		
 		filesPending--;
+		if (filesPending <0) filesPending = 0;
 		outputTextView.append("File transfer over, pending: " + filesPending);
 
 	}
