@@ -117,7 +117,7 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 		setContentView(R.layout.main);
 		Button milestoneBox = (Button) findViewById(R.id.Milestone);
 		milestoneBox.setOnClickListener(buttonListnener);
-		Button magicBox = (Button) findViewById(R.id.Milestone);
+		Button magicBox = (Button) findViewById(R.id.Magic);
 		magicBox.setOnClickListener(buttonListnener);
 		Button SvalurBox = (Button) findViewById(R.id.Svalur);
 		SvalurBox.setOnClickListener(buttonListnener);
