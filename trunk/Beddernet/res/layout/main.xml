@@ -19,7 +19,7 @@
 
 
 
-<CheckBox android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/MaintainerBox" android:text="Maintainer"></CheckBox><ListView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/in"></ListView>
+<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/ituHero" android:text="ITUHero"></Button><CheckBox android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/MaintainerBox" android:text="Maintainer"></CheckBox><ListView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/in"></ListView>
 
 
 
@@ -27,5 +27,7 @@
 
 
 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/outputTextView" android:scrollbarStyle="insideInset" android:text="Beddernet test platform"></TextView>
+
+
 
 </LinearLayout>
