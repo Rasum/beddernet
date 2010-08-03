@@ -350,7 +350,7 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 	private void sendFile(String address) {
 		Log.i(TAG, "Send file called");
 
-		outputTextView.append("Sending file to " + address + "\n");
+//		outputTextView.append("Sending file to " + address + "\n");
 		InputStream input = null;
 		try {
 			input = activity.getResources().openRawResource(R.raw.audio);
@@ -373,7 +373,7 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 			String result = ("File sent to " + address + "\nSending took:"
 					+ (endTime - startTime) + " milliseconds");
 			Log.i(TAG, result);
-			outputTextView.append(result);
+//			outputTextView.append(result);
 			byte[] testEnd = new byte[] { TEST_END };
 			mBeddernetService.sendUnicast(address, null, testEnd,
 					applicationIdentifier);
@@ -600,6 +600,9 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 			case FILE_END_ACK:
 				fileTransferComplete();
 				break;
+			case FILE_FRANSFER_REQUEST:
+				sendFile(senderAddress);
+				break;
 			default:
 				break;
 			}
@@ -651,8 +654,8 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 							e.printStackTrace();
 						}
 					} else {
-						outputTextView.append("File transfer over, pending:"
-								+ filesPending);
+//						outputTextView.append("File transfer over, pending:"
+//								+ filesPending);
 						break;
 					}
 				}
