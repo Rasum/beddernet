@@ -126,6 +126,9 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 		magicBox.setOnClickListener(buttonListnener);
 		Button SvalurBox = (Button) findViewById(R.id.Svalur);
 		SvalurBox.setOnClickListener(buttonListnener);
+		Button ituHeroButton = (Button) findViewById(R.id.ituHero);
+		ituHeroButton.setOnClickListener(buttonListnener);
+		
 		Button MSIBox = (Button) findViewById(R.id.MSI);
 		MSIBox.setOnClickListener(buttonListnener);
 		CheckBox maintainer = (CheckBox) findViewById(R.id.MaintainerBox);
@@ -291,6 +294,15 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 				}
 				refreshDeviceList();
 				break;
+			case R.id.ituHero:
+				try {
+					mBeddernetService.manualConnect("00:22:A5:B3:2D:3E");
+				} catch (RemoteException e1) {
+					Log.e(TAG, "Could not manually connect", e1);
+				}
+				refreshDeviceList();
+				break;
+
 			case R.id.MSI:
 				try {
 					mBeddernetService.manualConnect("00:22:A5:B4:78:C3");
