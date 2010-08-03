@@ -1,5 +1,6 @@
 package itu.beddernet;
 
+import itu.beddernet.approuter.BeddernetService;
 import itu.beddernet.approuter.IBeddernetService;
 import itu.beddernet.approuter.IBeddernetServiceCallback;
 import itu.beddernet.common.NetworkAddress;
@@ -17,6 +18,7 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.pm.ActivityInfo;
 import android.content.res.Resources.NotFoundException;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
@@ -46,7 +48,7 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 	private static final int CONTEXT_MENU_SEND_RTT = 4;
 	private static final int CONTEXT_MENU_VIEW_SERVICES = 5;
 	private static final int CONTEXT_MENU_SEND_FILE_DUPLEX = 6;
-	
+
 	private static final int MENU_DISCOVERY = 0;
 	private static final int MENU_DISCOVERABLE = 1;
 	private static final int MENU_BLUETOOTH_OFF = 2;
@@ -82,7 +84,7 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 	ServiceConnection sc = this;
 	public TextView outputTextView;
 	private int filesPending;
-	
+
 	protected void onDestroy() {
 		if (mBeddernetService != null) {
 			try {
@@ -338,40 +340,11 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void fileTransferComplete() {
 		filesPending--;
-		outputTextView.append("File transfer over, pending: " + 0);
+		outputTextView.append("File transfer over, pending: " + filesPending);
 
-	}
-	
-	private void duplexFiletransferTest(String testAddress,  int fileIterations) {
-
-//		long address = NetworkAddress.castNetworkAddressToLong(testAddress);
-		for (int i = 0; i < fileIterations; i++) {
-			byte[] startFileMsg = { FILE_FRANSFER_REQUEST };
-			try {
-				mBeddernetService.sendUnicast(testAddress, null, startFileMsg,applicationIdentifier);
-			} catch (RemoteException e1) {
-				Log.e(TAG, "duplexFiletransferTest error", e1);
-			}
-			sendFile(testAddress);
-			filesPending++;
-			while (true) {
-				if (filesPending > 0) {
-					try {
-						Thread.sleep(100);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				} else {
-					outputTextView.append("File transfer over, pending:"
-							+ filesPending);
-					break;
-				}
-			}
-		}
 	}
 
 	private void sendFile(String address) {
@@ -434,7 +407,7 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 
 		menu.add(0, CONTEXT_MENU_SEND_MESSAGE, 0, "Send Message");
 		menu.add(0, CONTEXT_MENU_SEND_FILE, 0, "Send file");
-		menu.add(0, CONTEXT_MENU_SEND_FILE_DUPLEX, 0, "Send and receive file");	
+		menu.add(0, CONTEXT_MENU_SEND_FILE_DUPLEX, 0, "Send and receive file");
 		menu.add(0, CONTEXT_MENU_SEND_RTT, 0, "Send ping");
 		menu.add(0, CONTEXT_MENU_VIEW_SERVICES, 0, "View services");
 		menu.add(0, CONTECT_MENU_DISCONNECT, 0, "Disconnect");
@@ -455,8 +428,9 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 			Log.i(TAG, "Trying to send message to : " + selectedAddress + "?");
 			return true;
 		case CONTEXT_MENU_SEND_FILE_DUPLEX:
-			duplexFiletransferTest(selectedAddress, 5);
-			Log.i(TAG, "Trying to send and receive message : " + selectedAddress + "?");
+			new DuplexFileTest(this).execute(selectedAddress, null, null);
+			Log.i(TAG, "Trying to send and receive message : "
+					+ selectedAddress + "?");
 			return true;
 		case CONTECT_MENU_DISCONNECT:
 			try {
@@ -546,8 +520,6 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 			Log.d(TAG, "Token sent to server :" + applicationIdentifierHash);
 			return applicationIdentifierHash;
 		}
-		
-		
 
 		public void update(String senderAddress, byte[] message)
 				throws RemoteException {
@@ -644,4 +616,51 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 
 		}
 	};
+
+	private class DuplexFileTest extends AsyncTask<String, Object, Object> {
+
+		private BeddernetConsole console;
+
+		public DuplexFileTest(BeddernetConsole console) {
+			this.console = console;
+		}
+
+		protected Object doInBackground(String... params) {
+			// console.duplexFiletransferTest(params[0], 5);
+			duplexFileTransfer(params[0], 5);
+			return null;
+		}
+
+		private void duplexFileTransfer(String address, int fileIterations) {
+			for (int i = 0; i < fileIterations; i++) {
+				byte[] startFileMsg = { FILE_FRANSFER_REQUEST };
+				try {
+					mBeddernetService.sendUnicast(address, null, startFileMsg,
+							applicationIdentifier);
+				} catch (RemoteException e1) {
+					Log.e(TAG, "duplexFiletransferTest error", e1);
+				}
+				sendFile(address);
+				filesPending++;
+				while (true) {
+					if (filesPending > 0) {
+						try {
+							Thread.sleep(100);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					} else {
+						outputTextView.append("File transfer over, pending:"
+								+ filesPending);
+						break;
+					}
+				}
+			}
+
+		}
+
+		protected void onPostExecute() {
+		}
+	}
 }
