@@ -8,10 +8,11 @@
 
 
 
-</TableRow>
-<TableRow android:id="@+id/TableRow03" android:layout_width="wrap_content" android:layout_height="wrap_content"><Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/Milestone" android:text="Milestone"></Button><Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/Magic" android:text="Magic"></Button>
-<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Svalur" android:id="@+id/Svalur"></Button>
-<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/MSI" android:text="Hero"></Button><Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Rasmus" android:id="@+id/rasmusLaptop"></Button></TableRow><Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/ituHero" android:text="ITUHero"></Button>
+<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/Magic" android:text="Magic"></Button><Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/Milestone" android:text="Milestone"></Button><Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Svalur" android:id="@+id/Svalur"></Button></TableRow>
+<TableRow android:id="@+id/TableRow03" android:layout_width="wrap_content" android:layout_height="wrap_content">
+
+<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/MSI" android:text="Hero"></Button><Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Rasmus" android:id="@+id/rasmusLaptop"></Button><Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/ituHero" android:text="ITUHero"></Button><Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/Dongle4" android:text="Mr 4"></Button></TableRow>
+
 </TableLayout>
 	
 	
