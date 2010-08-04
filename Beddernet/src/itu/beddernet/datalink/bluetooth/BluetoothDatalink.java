@@ -7,6 +7,8 @@ import itu.beddernet.datalink.DatalinkInterface;
 import itu.beddernet.router.dsdv.net.RouteManager;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.UUID;
 import java.util.Vector;
 
@@ -210,23 +212,33 @@ public class BluetoothDatalink implements DatalinkInterface {
 		BluetoothDevice other = btAdapter.getRemoteDevice(remoteAddress);
 		btAdapter.cancelDiscovery();
 		BluetoothSocket socket = null;
+		boolean connected = false;
+		for (int i = 1; i<4;i++){
 		try {
-			socket = other.createRfcommSocketToServiceRecord(BT_NETWORK_UUID);
-		} catch (IOException e) {
+//			socket = other.createRfcommSocketToServiceRecord(BT_NETWORK_UUID);
+			 Method m = other.getClass().getMethod("createRfcommSocket",
+			            new Class[] { int.class });
+			        socket = (BluetoothSocket)m.invoke(other, i);
+//		} catch (IOException e) {
+		} catch (Exception e) {
 			Log.e(TAG, "Datalink: could not create socket to device", e);
 		}
 		try {
 			socket.connect();
+			connected = true;
 			Log.i(TAG, "Connected with device manually");
+			break;
 		} catch (IOException e) {
 			Log.e(TAG, "Datalink: could not connect to device", e);
 			e.printStackTrace();
-			return 0; // error;
+		}
+//		return 0; // error;
 		}
 		Vector<BluetoothSocket> fakeVector = new Vector<BluetoothSocket>(1);
 		fakeVector.add(socket);
 		dm.handleNewlyDiscoveredConnections(fakeVector);
-		return -1;
+		if (connected)return -1;
+		else return 0;
 	}
 
 	public void swap(long dest) {
