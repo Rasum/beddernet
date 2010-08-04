@@ -11,7 +11,7 @@
 </TableRow>
 <TableRow android:id="@+id/TableRow03" android:layout_width="wrap_content" android:layout_height="wrap_content"><Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/Milestone" android:text="Milestone"></Button><Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/Magic" android:text="Magic"></Button>
 <Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Svalur" android:id="@+id/Svalur"></Button>
-<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/MSI" android:text="Hero"></Button></TableRow>
+<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/MSI" android:text="Hero"></Button><Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Rasmus" android:id="@+id/rasmusLaptop"></Button></TableRow><Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/ituHero" android:text="ITUHero"></Button>
 </TableLayout>
 	
 	
@@ -19,7 +19,7 @@
 
 
 
-<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/ituHero" android:text="ITUHero"></Button><CheckBox android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/MaintainerBox" android:text="Maintainer"></CheckBox><ListView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/in"></ListView>
+<CheckBox android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/MaintainerBox" android:text="Maintainer"></CheckBox><ListView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/in"></ListView>
 
 
 
@@ -27,6 +27,7 @@
 
 
 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/outputTextView" android:scrollbarStyle="insideInset" android:text="Beddernet test platform"></TextView>
+
 
 
 
