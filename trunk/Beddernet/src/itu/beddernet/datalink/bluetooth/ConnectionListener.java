@@ -94,6 +94,7 @@ public class ConnectionListener extends Thread {
 			}
 		}
 		aborted = true;
+		if (serverSocket != null)
 		try {
 			serverSocket.close();
 		} catch (IOException e) {
