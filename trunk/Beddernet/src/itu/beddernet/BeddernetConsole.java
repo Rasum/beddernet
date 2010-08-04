@@ -130,6 +130,9 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 		ituHeroButton.setOnClickListener(buttonListnener);
 		Button rasmusLaptopButton = (Button) findViewById(R.id.rasmusLaptop);
 		rasmusLaptopButton.setOnClickListener(buttonListnener);
+		Button mr4Button = (Button) findViewById(R.id.Dongle4);
+		mr4Button.setOnClickListener(buttonListnener);
+
 
 		Button MSIBox = (Button) findViewById(R.id.MSI);
 		MSIBox.setOnClickListener(buttonListnener);
@@ -175,8 +178,7 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 			return true;
 		case MENU_BEDNET_OFF:
 			Log.d(TAG, "onClick: stopping service");
-			unbindService(sc);
-			stopService(new Intent("itu.beddernet.approuter.BeddernetService"));
+			finish();
 			return true;
 		case MENU_BLUETOOTH_OFF:
 			Log.d(TAG, "Beddernet tries to manually turn Bluetooth off");
@@ -280,6 +282,16 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 				}
 				refreshDeviceList();
 				break;
+			case R.id.Dongle4:
+				try {
+					mBeddernetService.manualConnect("00:15:83:18:5C:BB");
+				} catch (RemoteException e1) {
+					Log.e(TAG, "Could not manually connect", e1);
+				}
+				refreshDeviceList();
+				break;
+	
+	
 			case R.id.Milestone:
 				try {
 					mBeddernetService.manualConnect("00:24:BA:97:58:77");
