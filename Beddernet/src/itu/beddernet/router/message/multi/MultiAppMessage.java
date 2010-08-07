@@ -18,12 +18,9 @@ public class MultiAppMessage extends MultiMessage {
 	/**
 	 * The message's payload
 	 */
-	private byte[] appMessage;
 	
-	/**
-	 * Indentifies what application this message is intended for
-	 */
-	private long serviceHash;
+	
+
 
 	/**
 	 * Class constructor
@@ -50,8 +47,8 @@ public class MultiAppMessage extends MultiMessage {
 		this.fromNetworkAddress = fromNetworkAddress;
 		this.numberOfAddresses = (byte) toNetworkAddresses.length;
 		this.toNetworkAddresses = toNetworkAddresses;
-		this.serviceHash = serviceHash;
-		this.appMessage = appMessage;
+		serviceHash = serviceHash;
+		appMessage = appMessage;
 
 	}
 
