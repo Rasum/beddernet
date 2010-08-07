@@ -12,7 +12,10 @@ import itu.beddernet.router.dsdv.minders.PeriodicBroadcastMinder;
 import itu.beddernet.router.dsdv.minders.RouteSender;
 import itu.beddernet.router.message.RouteBroadcastMessage;
 import itu.beddernet.router.message.multi.MultiAppMessage;
+import itu.beddernet.router.message.multi.MultiAppMessageUAIH;
+import itu.beddernet.router.message.multi.MultiMessage;
 import itu.beddernet.router.message.uni.UniAppMessage;
+import itu.beddernet.router.message.uni.UniAppMessageUAIH;
 import itu.beddernet.router.message.uni.UniMessage;
 
 import java.util.ArrayList;
@@ -236,13 +239,13 @@ public class RouteManager {
 			sendUNICAST_MSG((UniAppMessage) appMsg);
 			break;
 		case Message.UNICAST_APPLICATION_MESSAGE_UAIH:
-			sendUNICAST_MSG((UniAppMessage) appMsg);
+			sendUNICAST_MSG((UniAppMessageUAIH) appMsg);
 			break;
 		case Message.MULTICAST_APPLICATION_MSG:
 			sendMULTICAST_APPLICATION_MSG((MultiAppMessage) appMsg);
 			break;
 		case Message.MULTICAST_APPLICATION_MESSAGE_UAIH:
-			sendMULTICAST_APPLICATION_MSG((MultiAppMessage) appMsg);
+			sendMULTICAST_APPLICATION_MSG((MultiAppMessageUAIH) appMsg);
 			break;
 		default:
 			break;
@@ -281,7 +284,7 @@ public class RouteManager {
 	 * @param appMsg
 	 *            the message to send
 	 */
-	private void sendMULTICAST_APPLICATION_MSG(MultiAppMessage appMsg) {
+	private void sendMULTICAST_APPLICATION_MSG(MultiMessage appMsg) {
 		// first check if route is available
 
 		MultiMap mm = new MultiMap();

@@ -15,7 +15,14 @@ public abstract class MultiMessage extends Message {
 	protected long[] toNetworkAddresses;
 	protected byte numberOfAddresses;
 
+	
 	/**
+	 * Indentifies what application this message is intended for
+	 */
+	protected long serviceHash;
+	protected byte[] appMessage;
+	/**
+	 * 
 	 * 
 	 * @return the list of receivers
 	 */
@@ -29,6 +36,14 @@ public abstract class MultiMessage extends Message {
 	 */
 	public byte getNumberOfAddresses() {
 		return numberOfAddresses;
+	}
+
+	public byte[] getAppMessage() {
+		return appMessage;
+	}
+
+	public long getServiceHash() {
+		return serviceHash;
 	}
 
 }
