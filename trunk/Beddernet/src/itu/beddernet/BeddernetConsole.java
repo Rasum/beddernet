@@ -133,7 +133,6 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 		Button mr4Button = (Button) findViewById(R.id.Dongle4);
 		mr4Button.setOnClickListener(buttonListnener);
 
-
 		Button MSIBox = (Button) findViewById(R.id.MSI);
 		MSIBox.setOnClickListener(buttonListnener);
 		CheckBox maintainer = (CheckBox) findViewById(R.id.MaintainerBox);
@@ -290,8 +289,6 @@ public class BeddernetConsole extends Activity implements ServiceConnection {
 				}
 				refreshDeviceList();
 				break;
-	
-	
 			case R.id.Milestone:
 				try {
 					mBeddernetService.manualConnect("00:24:BA:97:58:77");
