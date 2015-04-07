@@ -1,4 +1,4 @@
-# beddernet
+# Beddernet
 
 Beddernet for Android, mobile ad-hoc middleware based on the Beddernet protocol.
 
